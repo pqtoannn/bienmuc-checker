@@ -1,0 +1,80 @@
+{
+  "donViCapTren": "Ủy ban nhân dân huyện Định Quán",
+  "donVi": "Ủy ban nhân dân xã Phú Lợi",
+  "soKyHieuHoSo": "01",
+  "tenHoSo": "Hồ sơ về việc thu, chi ngân sách và quản lý tài chính công của Ủy ban nhân dân xã Phú Lợi năm 2024",
+  "tieuDeNghiQuyet": "Hồ sơ về việc thu, chi ngân sách và quản lý tài chính công của Ủy ban nhân dân xã Phú Lợi năm 2024",
+  "namGiaiDoan": "2024",
+  "thoiGianHoSo": "Từ ngày 05/01/2024 đến ngày 31/12/2024",
+  "tongSoToText": "Bản mục lục này gồm 05 văn bản, 15 tờ",
+  "thbq": "Vĩnh viễn",
+  "banTo": "Văn phòng",
+  "tapSo": "01",
+  "rows": [
+    {
+      "soTT": "1",
+      "soKyHieuVanBan": "02/KH-UBND",
+      "ngayThangVanBan": "05/01/2024",
+      "tenLoaiTrichYeu": "Kế hoạch về việc thu ngân sách nhà nước trên địa bàn xã Phú Lợi năm 2024",
+      "tacGiaVanBan": "UBND xã Phú Lợi\nBan Tài chính",
+      "toSoTrangSo": "01",
+      "loaiBan": "Bản gốc",
+      "ghiChu": ""
+    },
+    {
+      "soTT": "2",
+      "soKyHieuVanBan": "15/QĐ-UBND",
+      "ngayThangVanBan": "12/02/2024",
+      "tenLoaiTrichYeu": "Quyết định về việc giao dự toán thu, chi ngân sách xã Phú Lợi năm 2024",
+      "tacGiaVanBan": "UBND xã Phú Lợi",
+      "toSoTrangSo": "04",
+      "loaiBan": "Bản gốc",
+      "ghiChu": ""
+    },
+    {
+      "soTT": "3",
+      "soKyHieuVanBan": "28/BC-UBND",
+      "ngayThangVanBan": "15/06/2024",
+      "tenLoaiTrichYeu": "Báo cáo tình hình thực hiện dự toán ngân sách 6 tháng đầu năm 2024",
+      "tacGiaVanBan": "UBND xã Phú Lợi - Ban Tài chính",
+      "toSoTrangSo": "08-11",
+      "loaiBan": "Bản gốc",
+      "ghiChu": ""
+    },
+    {
+      "soTT": "4",
+      "soKyHieuVanBan": "42/QĐ-UBND",
+      "ngayThangVanBan": "20/09/2024",
+      "tenLoaiTrichYeu": "Quyết định về việc thành lập Tổ kiểm tra quyết toán ngân sách xã năm 2024, đ/c Nguyễn Văn An",
+      "tacGiaVanBan": "UBND xã Phú Lợi",
+      "toSoTrangSo": "12",
+      "loaiBan": "Bản gốc",
+      "ghiChu": ""
+    },
+    {
+      "soTT": "5",
+      "soKyHieuVanBan": "89/TTr-UBND",
+      "ngayThangVanBan": "25/12/2024",
+      "tenLoaiTrichYeu": "Tờ trình về việc phê duyệt quyết toán thu, chi ngân sách xã Phú Lợi năm 2024",
+      "tacGiaVanBan": "UBND xã Phú Lợi",
+      "toSoTrangSo": "14-15",
+      "loaiBan": "Bản gốc",
+      "ghiChu": ""
+    }
+  ],
+  "rowsTrung": [
+    {
+      "soTT": "1",
+      "soKyHieuVanBan": "15/QĐ-UBND",
+      "ngayThangVanBan": "12/02/2024",
+      "tenLoaiTrichYeu": "Quyết định về việc giao dự toán thu, chi ngân sách xã Phú Lợi năm 2024 (Bản photocopy trùng lặp)",
+      "tacGiaVanBan": "UBND xã Phú Lợi",
+      "toSoTrangSo": "",
+      "loaiBan": "Photo",
+      "soHoSo": "01",
+      "lyDoTrung": "Trùng hồ sơ số 01",
+      "thbq": "Vĩnh viễn",
+      "ghiChu": "Trùng văn bản số 2 trong mục lục"
+    }
+  ]
+}

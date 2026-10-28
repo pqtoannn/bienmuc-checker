@@ -1,0 +1,39 @@
+# Dependencies
+node_modules/
+package-lock.json
+
+# Environment variables
+.env
+.env.local
+
+# Temporary inspection crops and grids
+inspect_output/
+tests/inspect_batch*/
+tests/zoom_*
+tests/full_*
+tests/temp_*
+tests/corner_*
+tests/strip_*
+tests/tail_*
+tests/*.jpg
+tests/*.png
+
+# OS & Editor cache
+.DS_Store
+Thumbs.db
+desktop.ini
+.idea/
+.vscode/
+*.suo
+*.ntvs*
+*.njsproj
+
+# Office lock files
+~$*.xlsx
+~$*.doc
+~$*.docx
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*

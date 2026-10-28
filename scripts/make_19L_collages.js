@@ -1,0 +1,78 @@
+import sharp from 'file:///D:/git_clone_ocr_bienmuc/bienmuc/node_modules/sharp/lib/index.js';
+import fs from 'fs';
+import path from 'path';
+
+async function make19LCollage() {
+  const cellW = 550;
+  const cellH = 180;
+  const items = [];
+
+  for (let i = 1; i <= 13; i++) {
+    const fnStr = String(i).padStart(3, '0');
+    const fn = 'C:/Users/Toan/Pictures/anh_HS_ch_check/PL_photos/PL_2019_19L/' + fnStr + '.jpg';
+    if (!fs.existsSync(fn)) continue;
+
+    const leftBuf = await sharp(fn)
+      .extract({ left: 100, top: 100, width: 1150, height: 400 })
+      .resize(320, 140, { fit: 'fill' })
+      .toBuffer();
+
+    const rightBuf = await sharp(fn)
+      .extract({ left: 1500, top: 30, width: 400, height: 260 })
+      .resize(200, 140, { fit: 'inside' })
+      .toBuffer();
+
+    const labelSvg = Buffer.from(
+      `<svg width="550" height="30">
+        <rect width="550" height="30" fill="#222"/>
+        <text x="10" y="20" font-family="sans-serif" font-size="16" font-weight="bold" fill="#00ffcc">${fnStr}.jpg</text>
+      </svg>`
+    );
+
+    const card = await sharp({
+      create: {
+        width: cellW,
+        height: cellH,
+        channels: 3,
+        background: { r: 240, g: 240, b: 240 }
+      }
+    })
+    .composite([
+      { input: labelSvg, left: 0, top: 0 },
+      { input: leftBuf, left: 5, top: 35 },
+      { input: rightBuf, left: 335, top: 35 }
+    ])
+    .jpeg()
+    .toBuffer();
+
+    items.push(card);
+  }
+
+  const rows = Math.ceil(items.length / 2);
+  const composites = [];
+  for (let idx = 0; idx < items.length; idx++) {
+    const col = idx % 2;
+    const row = Math.floor(idx / 2);
+    composites.push({
+      input: items[idx],
+      left: col * (cellW + 10) + 10,
+      top: row * (cellH + 10) + 10
+    });
+  }
+
+  await sharp({
+    create: {
+      width: 2 * (cellW + 10) + 10,
+      height: rows * (cellH + 10) + 10,
+      channels: 3,
+      background: { r: 210, g: 210, b: 210 }
+    }
+  })
+  .composite(composites)
+  .jpeg({ quality: 85 })
+  .toFile('tests/inspect_19L/collages/collage_19L_all.jpg');
+
+  console.log('Saved 19L collage!');
+}
+
+make19LCollage().catch(e => console.error(e));

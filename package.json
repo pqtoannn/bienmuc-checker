@@ -1,0 +1,33 @@
+{
+  "name": "bienmuc-checker",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Bộ kỹ năng và công cụ soát lỗi (double-check), biên mục và xuất file Excel tài liệu lưu trữ khối Văn phòng (VP / UBND)",
+  "main": "lib/excel-export-vp.js",
+  "bin": {
+    "bienmuc": "./bin/bienmuc-cli.js"
+  },
+  "scripts": {
+    "cli": "node bin/bienmuc-cli.js",
+    "verify": "node bin/bienmuc-cli.js verify",
+    "verify:year": "node bin/bienmuc-cli.js verify-year",
+    "test": "node bin/bienmuc-cli.js --help"
+  },
+  "keywords": [
+    "bienmuc",
+    "ocr",
+    "luu-tru",
+    "van-phong",
+    "ubnd",
+    "exceljs",
+    "sharp"
+  ],
+  "author": "Antigravity & User",
+  "license": "MIT",
+  "dependencies": {
+    "dotenv": "^18.0.9",
+    "exceljs": "^4.4.0",
+    "sharp": "^0.35.5",
+    "xlsx": "^0.18.5"
+  }
+}

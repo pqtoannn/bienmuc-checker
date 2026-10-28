@@ -1,0 +1,20 @@
+{
+  "paths": {
+    "photosDir": "C:/Users/Toan/Pictures/anh_HS_ch_check/PL_photos",
+    "rawExcelDir": "C:/Users/Toan/Downloads/BienMuc_Phu_Loc_ch_check",
+    "outputOcrDir": "C:/Users/Toan/Pictures/anh_HS_ch_check/PL_outputOCR",
+    "outputExcelDir": "C:/Users/Toan/Downloads/BienMuc_Phu_Loc_ch_check/Da_check",
+    "taiLieuLoaiFile": "C:/Users/Toan/Downloads/BienMuc_Phu_Loc_ch_check/Da_check/Tl_loại_VP_Toàn_PL.xlsx"
+  },
+  "archive": {
+    "donViCapTren": "Ủy ban nhân dân huyện Tân Phú",
+    "donVi": "Ủy ban nhân dân xã Phú Lộc",
+    "phong": "UBND xã Phú Lộc",
+    "banTo": "Văn phòng"
+  },
+  "grid": {
+    "thumbWidth": 160,
+    "thumbHeight": 120,
+    "cols": 6
+  }
+}

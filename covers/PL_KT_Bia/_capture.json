@@ -1,0 +1,169 @@
+{
+  "version": 1,
+  "events": [
+    {
+      "at": "2026-10-27T02:57:24.960Z",
+      "action": "capture",
+      "fileName": "001.jpg",
+      "userId": 5,
+      "username": "ctv1",
+      "hoTen": "Hùng",
+      "loaiBan": "Bản gốc"
+    },
+    {
+      "at": "2026-10-27T02:58:28.885Z",
+      "action": "capture",
+      "fileName": "002.jpg",
+      "userId": 5,
+      "username": "ctv1",
+      "hoTen": "Hùng",
+      "loaiBan": "Bản gốc"
+    },
+    {
+      "at": "2026-10-27T02:58:52.653Z",
+      "action": "capture",
+      "fileName": "003.jpg",
+      "userId": 5,
+      "username": "ctv1",
+      "hoTen": "Hùng",
+      "loaiBan": "Bản gốc"
+    },
+    {
+      "at": "2026-10-27T02:58:59.990Z",
+      "action": "capture",
+      "fileName": "004.jpg",
+      "userId": 5,
+      "username": "ctv1",
+      "hoTen": "Hùng",
+      "loaiBan": "Bản gốc"
+    },
+    {
+      "at": "2026-10-27T02:59:07.881Z",
+      "action": "capture",
+      "fileName": "005.jpg",
+      "userId": 5,
+      "username": "ctv1",
+      "hoTen": "Hùng",
+      "loaiBan": "Bản gốc"
+    },
+    {
+      "at": "2026-10-27T02:59:15.734Z",
+      "action": "capture",
+      "fileName": "006.jpg",
+      "userId": 5,
+      "username": "ctv1",
+      "hoTen": "Hùng",
+      "loaiBan": "Bản gốc"
+    },
+    {
+      "at": "2026-10-27T02:59:22.849Z",
+      "action": "capture",
+      "fileName": "007.jpg",
+      "userId": 5,
+      "username": "ctv1",
+      "hoTen": "Hùng",
+      "loaiBan": "Bản gốc"
+    },
+    {
+      "at": "2026-10-27T02:59:29.716Z",
+      "action": "capture",
+      "fileName": "008.jpg",
+      "userId": 5,
+      "username": "ctv1",
+      "hoTen": "Hùng",
+      "loaiBan": "Bản gốc"
+    },
+    {
+      "at": "2026-10-27T02:59:38.487Z",
+      "action": "capture",
+      "fileName": "009.jpg",
+      "userId": 5,
+      "username": "ctv1",
+      "hoTen": "Hùng",
+      "loaiBan": "Bản gốc"
+    },
+    {
+      "at": "2026-10-27T02:59:46.382Z",
+      "action": "capture",
+      "fileName": "010.jpg",
+      "userId": 5,
+      "username": "ctv1",
+      "hoTen": "Hùng",
+      "loaiBan": "Bản gốc"
+    },
+    {
+      "at": "2026-10-27T02:59:53.624Z",
+      "action": "capture",
+      "fileName": "011.jpg",
+      "userId": 5,
+      "username": "ctv1",
+      "hoTen": "Hùng",
+      "loaiBan": "Bản gốc"
+    },
+    {
+      "at": "2026-10-27T03:00:00.465Z",
+      "action": "capture",
+      "fileName": "012.jpg",
+      "userId": 5,
+      "username": "ctv1",
+      "hoTen": "Hùng",
+      "loaiBan": "Bản gốc"
+    },
+    {
+      "at": "2026-10-27T03:00:12.326Z",
+      "action": "capture",
+      "fileName": "013.jpg",
+      "userId": 5,
+      "username": "ctv1",
+      "hoTen": "Hùng",
+      "loaiBan": "Bản gốc"
+    },
+    {
+      "at": "2026-10-27T03:00:20.166Z",
+      "action": "capture",
+      "fileName": "014.jpg",
+      "userId": 5,
+      "username": "ctv1",
+      "hoTen": "Hùng",
+      "loaiBan": "Bản gốc"
+    },
+    {
+      "at": "2026-10-27T03:00:30.152Z",
+      "action": "capture",
+      "fileName": "015.jpg",
+      "userId": 5,
+      "username": "ctv1",
+      "hoTen": "Hùng",
+      "loaiBan": "Bản gốc"
+    },
+    {
+      "at": "2026-10-27T03:00:55.539Z",
+      "action": "capture",
+      "fileName": "016.jpg",
+      "userId": 5,
+      "username": "ctv1",
+      "hoTen": "Hùng",
+      "loaiBan": "Bản gốc"
+    },
+    {
+      "at": "2026-10-27T03:01:11.935Z",
+      "action": "capture",
+      "fileName": "017.jpg",
+      "userId": 5,
+      "username": "ctv1",
+      "hoTen": "Hùng",
+      "loaiBan": "Bản gốc"
+    }
+  ],
+  "contributors": {
+    "5": {
+      "userId": 5,
+      "username": "ctv1",
+      "hoTen": "Hùng",
+      "captureCount": 17,
+      "replaceCount": 0,
+      "deleteCount": 0,
+      "lastAt": "2026-10-27T03:01:11.935Z"
+    }
+  }
+}
