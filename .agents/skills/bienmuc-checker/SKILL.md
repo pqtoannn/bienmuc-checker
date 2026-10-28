@@ -1,23 +1,22 @@
 ---
 name: bienmuc-checker
-description: Quy chuẩn đối chiếu, soát lỗi (double-check), trích xuất biên mục và xuất file Excel tài liệu lưu trữ văn phòng (VP / UBND). Sử dụng khi người dùng yêu cầu kiểm tra ảnh scan hồ sơ, sửa lỗi OCR, trích xuất chính xác số hiệu, tác giả, ngày tháng, trích yếu, số tờ, loại bản, xử lý ảnh bìa, tờ chốt cuối (ghim bấm), nhận diện tài liệu Trùng / Photo để đồng bộ file tài liệu loại và xuất file Excel theo chuẩn thể thức văn bản lưu trữ Việt Nam.
+description: Quy chuẩn đối chiếu, soát lỗi (double-check), trích xuất biên mục và xuất file Excel tài liệu lưu trữ các khối Văn phòng (VP), Kế toán (KT), và Văn hóa - Xã hội (VHXH / NTM). Hỗ trợ cả 2 chế độ: (1) Double-check file OCR thô và (2) Direct AI Vision đọc trực tiếp ảnh scan khi chưa có file OCR. Tự động bóc tách số hiệu, tác giả, ngày tháng, trích yếu, xử lý dải số tờ liên tục 01-N, bóc tách bìa 2 lớp, gộp tập ảnh minh chứng NTM, và đồng bộ file tài liệu loại theo chuẩn thể thức văn bản lưu trữ Việt Nam.
 ---
 
-# KỸ NĂNG SOÁT LỖI, BIÊN MỤC & XUẤT EXCEL TÀI LIỆU LƯU TRỮ VĂN PHÒNG (VP / UBND)
+# KỸ NĂNG SOÁT LỖI, BIÊN MỤC & XUẤT EXCEL TÀI LIỆU LƯU TRỮ (VP / KT / VHXH)
 
-Kỹ năng này định nghĩa toàn bộ quy chuẩn nghiệp vụ, quy tắc bóc tách, quy trình **Double-Check (Soát lỗi đối chiếu)** giữa ảnh scan tài liệu lưu trữ gốc và dữ liệu OCR, chuẩn định dạng JSON tương thích 100% với hệ thống `bienmuc`, cùng cơ chế xử lý tài liệu loại (Trùng / Photo) đồng bộ vào file tổng hợp.
+Kỹ năng này định nghĩa toàn bộ quy chuẩn nghiệp vụ, quy tắc bóc tách, quy trình **Double-Check (Soát lỗi đối chiếu)** và **Direct AI Vision (Bóc tách trực tiếp từ ảnh scan)** cho các khối tài liệu lưu trữ: **Văn phòng (VP)**, **Kế toán (KT)** và **Văn hóa - Xã hội (VHXH / Chuyên đề Nông thôn mới)**, chuẩn định dạng JSON tương thích 100% với hệ thống xuất Excel 8 cột lưu trữ và cơ chế đồng bộ tài liệu loại dùng chung.
 
 ---
 
 ## 1. MỤC ĐÍCH & PHẠM VI ÁP DỤNG
-- **Phạm vi**: Tài liệu hành chính thông thường (khối Văn phòng / VP, UBND cấp xã, phường, thị trấn, huyện).
-- **Mục đích**:
-  - Đối chiếu ảnh scan gốc với bản OCR thô (do Flash-Lite hoặc các model OCR cấp 1 tạo ra).
-  - Khắc phục các lỗi phổ biến: mất dấu tiếng Việt, nhầm lẫn số hiệu, lấy sai ngày tháng, cắt cụt trích yếu, thiếu tên người liên quan, nhầm số trang viết tay.
-  - Nhận diện chính xác **ảnh bìa hồ sơ** và **ảnh tờ cuối ghim bấm (tài liệu nhiều tờ)**.
-  - Nhận diện **tài liệu ghi chữ "Trùng" hoặc "Photo"** ở mép trang/số trang để loại bỏ khỏi hồ sơ và chuyển vào file Tài liệu loại dùng chung.
-  - Chuẩn hóa đầu ra theo đúng thể thức lưu trữ nhà nước.
-  - **Sinh dữ liệu JSON chuẩn để xuất trực tiếp sang file Excel (.xlsx)** theo mẫu chuẩn lưu trữ khối VP (Mục lục văn bản 8 cột).
+- **Phạm vi áp dụng:**
+  - **Khối Văn phòng (VP / UBND):** Tập lưu văn bản đi/đến, Quyết định, Kế hoạch, Báo cáo, Tờ trình theo từng năm. `banTo: "Văn phòng"`.
+  - **Khối Kế toán (KT):** Dự toán, quyết toán ngân sách xã, báo cáo tài chính, chứng từ rút vốn, công trình hạ tầng. `banTo: "Kế toán"`.
+  - **Khối Văn hóa - Xã hội (VHXH):** Hồ sơ chuyên đề (Xây dựng xã đạt chuẩn Nông thôn mới / NTM nâng cao, Y tế, Giáo dục, Lao động - TBXH, Văn hóa thể thao). `banTo: "Văn hóa - Xã hội"`.
+- **Hai chế độ hoạt động linh hoạt:**
+  - **Chế độ 1 - Double-Check Đối chiếu:** Áp dụng khi đã có sẵn file Excel OCR thô (do Flash-Lite hoặc công cụ OCR cấp 1 tạo ra). Hệ thống tiến hành soi ảnh scan gốc để kiểm định dải số tờ, sửa lỗi chính tả OCR, lọc bỏ bìa loại trừ, và chuẩn hóa dãy số tờ liên tục.
+  - **Chế độ 2 - Direct AI Vision:** Áp dụng khi **chưa có file OCR thô** (chỉ có thư mục ảnh scan gốc `.jpg` và `_capture.json`). Hệ thống dùng AI Vision đọc trực tiếp ảnh scan gốc, tự động phân nhóm văn bản nhiều tờ, trích xuất chuẩn 8 trường thông tin và xuất thẳng file Excel hoàn chỉnh không cần khâu OCR sơ bộ trung gian.
 
 ---
 
@@ -269,6 +268,36 @@ Qua quá trình rà soát hàng trăm hồ sơ và hàng vạn trang scan thực
   - Tự động hiệu chỉnh lại `toSo` và `soTo` của văn bản bị lệch dựa trên số lượng ảnh scan thực tế của văn bản đó.
 
 ### 7.5. Phụ lục (Annexes) và Tờ chốt ghim cuối cùng
+* **Hiện tượng:** Văn bản chính (như Báo cáo, Quyết định giao chỉ tiêu) kèm theo 1 hoặc nhiều trang bảng biểu phụ lục ở phía sau.
+* **Xử lý:**
+  - Không tách phụ lục thành văn bản độc lập nếu phụ lục đó thuộc về văn bản chính (tiêu đề ghi "Phụ lục kèm theo Quyết định số...").
+  - Gộp toàn bộ số tờ của văn bản chính và các trang phụ lục thành một dải số tờ duy nhất (ví dụ: Quyết định tờ 01, Phụ lục tờ 02-05 $\rightarrow$ ghi tờ số `01-05`).
+
+### 7.6. Khối Văn hóa - Xã hội (Chuyên đề Nông thôn mới nâng cao): Xử lý Bìa 2 lớp
+* **Hiện tượng:** Trong hồ sơ NTM của khối VHXH, nhân viên scan thường chụp 2 lớp bìa:
+  - Lớp 1 (`001.jpg`): Bìa lưu trữ form in sẵn (có chữ to "HỒ SƠ", kẻ viền đôi, ghi tên xã Trà Cổ).
+  - Lớp 2 (`002.jpg`): Bìa tập chuyên đề màu xanh (in hoa "HỒ SƠ NÔNG THÔN MỚI NÂNG CAO" hoặc "HỒ SƠ MINH CHỨNG TIÊU CHÍ...").
+* **Xử lý:**
+  - Cả 2 ảnh bìa này đều **KHÔNG** phải văn bản hành chính bên trong hồ sơ.
+  - Tự động bóc tách cả 2 ảnh sang sheet phụ `Tài liệu loại` (hoặc file loại chung `Tl_loại_VP_Toàn_TC.xlsx`).
+  - Văn bản mục lục chính bắt đầu đánh số từ văn bản thực sự đầu tiên (`003.jpg`), với số tờ xuất phát chuẩn xác từ `01` (hoặc `01-xx`).
+
+### 7.7. Tập hình ảnh minh chứng Nông thôn mới (Photo Evidence Album)
+* **Hiện tượng:** Ở cuối mỗi hồ sơ tiêu chí NTM thường có 5 đến 30 tờ in màu chụp các công trình: trường học, đường hoa, trạm y tế, cổng chào, bãi xử lý rác, mô hình chăn nuôi...
+* **Xử lý:**
+  - **Quy tắc gộp:** BẮT BUỘC gộp toàn bộ các trang ảnh liên tiếp này thành **một mục văn bản duy nhất** trong mục lục:
+    - *Tên loại và trích yếu:* `"Hình ảnh minh chứng kết quả xây dựng nông thôn mới nâng cao xã Trà Cổ năm 2022 ([Tên công trình/tiêu chí])"`
+    - *Tác giả:* `"Ủy ban nhân dân xã Trà Cổ"`
+    - *Ngày tháng:* Ghi năm `"2022"` (hoặc ngày chụp nếu có in trên ảnh)
+    - *Số tờ:* Dải liên tục từ trang ảnh đầu đến trang ảnh cuối (ví dụ `09-15`).
+  - **CẤM:** Tuyệt đối không bóc tách mỗi bức ảnh thành một dòng STT riêng lẻ.
+
+### 7.8. Bảng biểu tự chấm điểm tiêu chí NTM không số hiệu
+* **Hiện tượng:** Các bảng tự đánh giá chấm điểm 19 tiêu chí NTM thường chỉ có tiêu đề bảng và ghi dòng chữ nhỏ: *"Đính kèm Báo cáo số 88/BC-UBND ngày 15/9/2022 của UBND xã Trà Cổ"*.
+* **Xử lý:**
+  - Cột `soKyHieu`: Để trống `""`.
+  - Cột `ngayThang`: Lấy theo ngày của Báo cáo đính kèm (ví dụ: `15/09/2022`).
+  - Cột `tenLoaiTrichYeu`: Ghi rõ tên bảng biểu + xuất xứ: `"Kết quả thực hiện tiêu chí nông thôn mới nâng cao năm 2022 xã Trà Cổ (kèm theo Báo cáo số 88/BC-UBND ngày 15/9/2022 của UBND xã Trà Cổ)"`.
 * **Hiện tượng:** Phụ lục bảng biểu nhiều trang không đánh số hiệu riêng, hoặc có số trang in riêng (`Trang 1/5`, `Trang 2/5`...).
 * **Xử lý:**
   - Phụ lục đính kèm theo văn bản chính được gộp chung số tờ với văn bản chính đó nếu chúng được bấm chung 1 ghim.
