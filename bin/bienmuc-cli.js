@@ -5,7 +5,7 @@ import xlsx from "xlsx";
 import config from "../config/index.js";
 import { generateCornerGrids, cropTopRight, cropHeader } from "../lib/visual-inspector.js";
 import { exportJsonToExcel } from "../lib/excel-export-vp.js";
-import { appendTaiLieuLoai } from "../lib/tai-lieu-loai-sync.js";
+import { appendTaiLieuLoai, initTaiLieuLoaiTemplate } from "../lib/tai-lieu-loai-sync.js";
 
 function parseRange(str) {
   if (!str) return null;
@@ -192,7 +192,90 @@ function handleVerifyYear(year) {
   }
 }
 
+function handleVerifyKT() {
+  const dir = config.paths.outputExcelDir;
+  if (!fs.existsSync(dir)) {
+    console.error(`Thư mục xuất không tồn tại: ${dir}`);
+    return;
+  }
+
+  const files = fs.readdirSync(dir)
+    .filter((f) => f.startsWith("TC_KT_") && f.endsWith(".xlsx"))
+    .sort();
+
+  if (files.length === 0) {
+    console.log(`Không tìm thấy file nào của khối Kế toán (TC_KT_*) trong ${dir}`);
+    return;
+  }
+
+  console.log(`\n=== KIỂM ĐỊNH TẤT CẢ ${files.length} HỒ SƠ KHỐI KẾ TOÁN ===\n`);
+
+  let allPass = true;
+  let totalDocs = 0;
+  let totalSheets = 0;
+  const summary = [];
+
+  for (const f of files) {
+    const p = path.join(dir, f);
+    const wb = xlsx.readFile(p);
+    const ws = wb.Sheets["Mục lục văn bản"];
+    const rows = ws ? xlsx.utils.sheet_to_json(ws, { header: 1 }) : [];
+    const dataRows = rows.filter((r) => r && r[0] && String(r[0]).match(/^\d+$/));
+
+    let ok = true;
+    let prevEnd = 0;
+
+    dataRows.forEach((r, idx) => {
+      const pageStr = String(r[5] || "").trim();
+      const pr = parseRange(pageStr);
+      if (!pr) {
+        ok = false;
+        return;
+      }
+      if (idx === 0) {
+        if (pr.start !== 1) ok = false;
+      } else {
+        if (pr.start !== prevEnd + 1) ok = false;
+      }
+      prevEnd = pr.end;
+    });
+
+    summary.push({
+      "Mã HS": f.replace(".xlsx", ""),
+      "Số VB": dataRows.length,
+      "Tờ bắt đầu": dataRows[0] ? dataRows[0][5] : "",
+      "Tờ kết thúc": dataRows[dataRows.length - 1] ? dataRows[dataRows.length - 1][5] : "",
+      "Tổng số tờ": prevEnd,
+      "Kết quả": ok ? "PASS" : "FAIL",
+    });
+
+    if (!ok) allPass = false;
+    totalDocs += dataRows.length;
+    totalSheets += prevEnd;
+  }
+
+  console.table(summary);
+  console.log(`Tổng số: ${files.length} hồ sơ Kế toán | ${totalDocs} văn bản | ${totalSheets} tờ lưu trữ.`);
+  if (allPass && files.length > 0) {
+    console.log(`=> TẤT CẢ ${files.length} HỒ SƠ KHỐI KẾ TOÁN ĐỀU ĐẠT TIÊU CHUẨN XUẤT SẮC!`);
+  }
+}
+
 async function handleSyncLoai(args) {
+  const subArgs = args.slice(1);
+  const isInit = subArgs.includes("--init") || subArgs.length === 0;
+  const targetPath = config.paths.taiLieuLoaiFile;
+
+  if (isInit) {
+    if (!fs.existsSync(targetPath)) {
+      await initTaiLieuLoaiTemplate(targetPath);
+      console.log(`Đã khởi tạo thành công file tài liệu loại tại: ${targetPath}`);
+    } else {
+      console.log(`File tài liệu loại đã tồn tại và sẵn sàng tại: ${targetPath}`);
+    }
+    return;
+  }
+
   const typeIdx = args.indexOf("--type");
   const docIdx = args.indexOf("--doc");
   const dosIdx = args.indexOf("--dos");
@@ -205,6 +288,7 @@ async function handleSyncLoai(args) {
 
   if (!tenVanBan) {
     console.error("Lỗi: Thiếu tham số --doc <tên trích yếu văn bản loại>");
+    console.error("Hoặc gõ: node bin/bienmuc-cli.js sync-loai --init để khởi tạo template.");
     process.exit(1);
   }
 
@@ -266,6 +350,9 @@ async function main() {
       break;
     case "verify-year":
       handleVerifyYear(args[1]);
+      break;
+    case "verify-kt":
+      handleVerifyKT();
       break;
     case "sync-loai":
       await handleSyncLoai(args);

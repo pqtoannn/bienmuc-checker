@@ -11,6 +11,7 @@
     "cli": "node bin/bienmuc-cli.js",
     "verify": "node bin/bienmuc-cli.js verify",
     "verify:year": "node bin/bienmuc-cli.js verify-year",
+    "verify:kt": "node bin/bienmuc-cli.js verify-kt",
     "test": "node bin/bienmuc-cli.js --help"
   },
   "keywords": [
